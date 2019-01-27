@@ -48,9 +48,20 @@ namespace MathQuiz02
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (timeLeft > 0)
+            if (CheckTheAnswer())
+            {
+                timer1.Stop();
+                MessageBox.Show("CORRECT");
+                startButton.Enabled = true;
+            }
+            else if (timeLeft > 0)
             {
                 timeLeft = timeLeft - 1;
+                timeLabel.Text = timeLeft + " seconds";
+            }
+            else if (timeLeft > 0)
+            {
+                timeLeft--;
                 timeLabel.Text = timeLeft + " seconds";
             }
             else
@@ -62,5 +73,15 @@ namespace MathQuiz02
                 startButton.Enabled = true;
             }
         }
+
+        private bool CheckTheAnswer()
+        {
+            if (addend1 + addend2 == sum.Value)
+                return true;
+            else
+                return false;
+        }
+
+    
     }
 }
