@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace MathQuiz02
 {
+   
     public partial class Form1 : Form
     {
         // Adding Random object called randomizer.
@@ -25,14 +26,20 @@ namespace MathQuiz02
         {
             addend1 = randomizer.Next(51);
             addend2 = randomizer.Next(51);
-            plusLeftLabel = addend1.ToString();
-            plusRightLabel = addend2.ToString();
+            plusLeftLabel.Text = addend1.ToString();
+            plusRightLabel.Text = addend2.ToString();
             sum.Value = 0;
         }
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            StartTheQuiz();
+            startButton.Enabled = false;
         }
     }
 }
