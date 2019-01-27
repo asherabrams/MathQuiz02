@@ -18,6 +18,7 @@ namespace MathQuiz02
         // Creating computer-generated addends for addition problem.
         int addend1;
         int addend2;
+        int timeLeft;
 
         /// <summary>
         /// Start the quiz - create problems, start timer.
@@ -29,6 +30,9 @@ namespace MathQuiz02
             plusLeftLabel.Text = addend1.ToString();
             plusRightLabel.Text = addend2.ToString();
             sum.Value = 0;
+            timeLeft = 30;
+            timeLabel.Text = "30 seconds";
+            timer1.Start();
         }
 
         public Form1()
@@ -40,6 +44,23 @@ namespace MathQuiz02
         {
             StartTheQuiz();
             startButton.Enabled = false;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft = timeLeft - 1;
+                timeLabel.Text = timeLeft + " seconds";
+            }
+            else
+            {
+                timer1.Stop();
+                timeLabel.Text = "Time's up!";
+                MessageBox.Show("You didn't finish in time.", "Try again!");
+                sum.Value = addend1 + addend2;
+                startButton.Enabled = true;
+            }
         }
     }
 }
