@@ -18,6 +18,8 @@ namespace MathQuiz02
         // Creating computer-generated addends for addition problem.
         int addend1;
         int addend2;
+        int minuend;
+        int subtrahend;
         int timeLeft;
 
         /// <summary>
@@ -30,6 +32,11 @@ namespace MathQuiz02
             plusLeftLabel.Text = addend1.ToString();
             plusRightLabel.Text = addend2.ToString();
             sum.Value = 0;
+            minuend = randomizer.Next(1, 101);
+            subtrahend = randomizer.Next(1, minuend);
+            minusLeftLabel.Text = minuend.ToString();
+            minusRightLabel.Text = subtrahend.ToString();
+            difference.Value = 0;
             timeLeft = 30;
             timeLabel.Text = "30 seconds";
             timer1.Start();
@@ -70,13 +77,15 @@ namespace MathQuiz02
                 timeLabel.Text = "Time's up!";
                 MessageBox.Show("You didn't finish in time.", "Try again!");
                 sum.Value = addend1 + addend2;
+                difference.Value = minuend - subtrahend;
                 startButton.Enabled = true;
             }
         }
 
         private bool CheckTheAnswer()
         {
-            if (addend1 + addend2 == sum.Value)
+            if ((addend1 + addend2 == sum.Value)
+                && (minuend - subtrahend == difference.Value))
                 return true;
             else
                 return false;
